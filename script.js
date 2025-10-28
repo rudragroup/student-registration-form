@@ -1,4 +1,4 @@
-const scriptURL = "https://script.google.com/macros/s/AKfycbzwHlDblWNgHBJFa6iqv1PVss0YgXbYUXwi7lsKEwzYBAumtmQ6Rq421JEIzh5zAR-Q/exec";
+const scriptURL = "https://script.google.com/macros/s/AKfycbw2fKsf80tn8upWfX15hX2D_C2Df-OPrXI-1eB5jkACHPcn_5bpI1w43TKihqXlK5W-/exec";
 
 /**
  * Show/hide "Other" input fields based on selection
@@ -85,3 +85,4 @@ async function handleSubmit(event) {
 
 // Attach submit handler
 document.getElementById("registrationForm").addEventListener("submit", handleSubmit);
+
