@@ -1,5 +1,5 @@
 // Replace this with your deployed Web App URL (make sure it ends with /exec)
-const scriptURL = "https://script.google.com/macros/s/AKfycbym6N-o3EOKSNTaNGLBNtF1AyQPNHBUSN_6OgOnUCC1Ytv-e5dEYMia1AbCGlCKplg/exec";
+const scriptURL = "https://script.google.com/macros/s/AKfycbyjU7-k5bbPq6N435t2JNNhtK3iIn2FuxsTqMym1u2hbm-fB2BaaWE981a9Y9eSY2kN/exec";
 
 // Handle showing and hiding "Other" inputs when selected
 function handleOther(selectField, otherInput) {
@@ -76,4 +76,5 @@ async function handleSubmit(event) {
 }
 
 document.getElementById("registrationForm").addEventListener("submit", handleSubmit);
+
 
