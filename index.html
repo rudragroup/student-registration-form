@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Student Registration Form</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <main class="container" role="main">
+    <section class="card">
+      <h2>Student Registration</h2>
+      <form id="registrationForm" novalidate>
+        <div class="grid">
+          <div class="field">
+            <label for="name">Student Name</label>
+            <input id="name" name="name" type="text" required autocomplete="off" />
+          </div>
+          <div class="field">
+            <label for="contact">Contact Number</label>
+            <input id="contact" name="contact" type="tel" maxlength="10" inputmode="numeric" required placeholder="10-digit number" />
+          </div>
+          <div class="field">
+            <label for="email">Email ID</label>
+            <input id="email" name="email" type="email" required placeholder="example@mail.com" />
+          </div>
+          <div class="field full">
+            <label>Gender</label>
+            <div class="radio-group">
+              <label><input type="radio" name="gender" value="Male" required /> Male</label>
+              <label><input type="radio" name="gender" value="Female" /> Female</label>
+              <label><input type="radio" name="gender" value="Other" /> Other</label>
+            </div>
+          </div>
+          <div class="field">
+            <label for="aadhar">Aadhar Number</label>
+            <input id="aadhar" name="aadhar" type="text" maxlength="12" inputmode="numeric" placeholder="12-digit number" required />
+          </div>
+          <div class="field">
+            <label for="education">Current Education</label>
+            <select id="education" name="education" required>
+              <option value="" disabled selected>Select</option>
+              <option value="BE/B.Tech">BE/B.Tech</option>
+              <option value="Diploma">Diploma</option>
+              <option value="Arts">Arts</option>
+              <option value="Commerce">Commerce</option>
+              <option value="Science">Science</option>
+              <option value="Other">Other</option>
+            </select>
+            <input id="educationOther" class="hidden" placeholder="Please specify" type="text" />
+          </div>
+          <div class="field">
+            <label for="standard">Standard / Year of Study</label>
+            <input id="standard" name="standard" type="text" required />
+          </div>
+          <div class="field">
+            <label for="college">College Name</label>
+            <input id="college" name="college" type="text" required />
+          </div>
+          <div class="field">
+            <label for="course">Preference of Course</label>
+            <select id="course" name="course" required>
+              <option value="" disabled selected>Select</option>
+              <option value="Arduino">Arduino</option>
+              <option value="PCS">PCS</option>
+              <option value="Computers">Computers</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="category">Category</label>
+            <select id="category" name="category" required>
+              <option value="" disabled selected>Select</option>
+              <option value="OBC">OBC</option>
+              <option value="SBC">SBC</option>
+              <option value="SC">SC</option>
+              <option value="ST">ST</option>
+              <option value="Open">Open</option>
+              <option value="Other">Other</option>
+            </select>
+            <input id="categoryOther" class="hidden" placeholder="Please specify" type="text" />
+          </div>
+          <div class="field">
+            <label for="paymentMode">Payment Mode</label>
+            <select id="paymentMode" name="paymentMode" required>
+              <option value="" disabled selected>Select</option>
+              <option value="Cash">Cash</option>
+              <option value="UPI">UPI</option>
+              <option value="Card">Card</option>
+              <option value="Other">Other</option>
+            </select>
+            <input id="paymentModeOther" class="hidden" placeholder="Please specify" type="text" />
+          </div>
+          <div class="field full">
+            <label for="paymentStatus">Payment Status</label>
+            <select id="paymentStatus" name="paymentStatus" required>
+              <option value="" disabled selected>Select</option>
+              <option value="Pending">Pending</option>
+              <option value="Completed">Completed</option>
+              <option value="Failed">Failed</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="submit">Submit</button>
+        <p id="formStatus" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+  <script src="script/script.js"></script>
+</body>
+</html>
