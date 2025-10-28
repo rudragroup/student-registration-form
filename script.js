@@ -1,8 +1,7 @@
-const scriptURL = "https://script.google.com/macros/s/AKfycbyksFRFJUWIXAs4uPTxGo-29Gf0gRF17zuCUMV65YqPPEiZK3ek5kqV9NhawPk3OlW0/exec";
+// Replace this with your deployed Web App URL (make sure it ends with /exec)
+const scriptURL = "https://script.google.com/macros/s/AKfycbx0bSk8dX--IMKRKu9f6hg38YzlLWAc3g_doJuMHK0PKla6Z0SFO55bEYx2IACbns0/exec";
 
-/**
- * Show/hide "Other" input fields based on selection
- */
+// Handle showing and hiding "Other" inputs when selected
 function handleOther(selectField, otherInput) {
   selectField.addEventListener("change", () => {
     if (selectField.value === "Other") {
@@ -17,7 +16,6 @@ function handleOther(selectField, otherInput) {
   });
 }
 
-// Apply to all "Other" fields
 ["education", "category", "paymentMode"].forEach(id => {
   handleOther(
     document.getElementById(id),
@@ -25,16 +23,13 @@ function handleOther(selectField, otherInput) {
   );
 });
 
-/**
- * Handle form submission
- */
+// Handle form submission
 async function handleSubmit(event) {
   event.preventDefault();
   const form = event.target;
   const statusEl = document.getElementById("formStatus");
-  statusEl.textContent = "";
+  statusEl.textContent = "Submitting...";
 
-  // Collect form data
   const formData = {};
   [...form.elements].forEach(el => {
     if (!el.name) return;
@@ -43,13 +38,11 @@ async function handleSubmit(event) {
     }
   });
 
-  // Validate contact number (10 digits)
   if (!/^\d{10}$/.test(formData.contact)) {
     statusEl.textContent = "Invalid contact number";
     return;
   }
 
-  // Validate Aadhar number (12 digits)
   if (!/^\d{12}$/.test(formData.aadhar)) {
     statusEl.textContent = "Invalid Aadhar number";
     return;
@@ -68,22 +61,18 @@ async function handleSubmit(event) {
     if (response.ok && result.result === "success") {
       statusEl.textContent = "Registration successful!";
       form.reset();
-      // Hide all "Other" inputs after reset
       ["educationOther", "categoryOther", "paymentModeOther"].forEach(id => {
         const el = document.getElementById(id);
         el.classList.add("hidden");
         el.required = false;
       });
     } else {
-      statusEl.textContent = result.message || "Error submitting form";
+      statusEl.textContent = result.message || "Error submitting form.";
     }
   } catch (err) {
     console.error("Error submitting form:", err);
-    statusEl.textContent = "Network error. Try again.";
+    statusEl.textContent = "Network error. Please try again.";
   }
 }
 
-// Attach submit handler
 document.getElementById("registrationForm").addEventListener("submit", handleSubmit);
-
-
