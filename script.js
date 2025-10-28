@@ -1,5 +1,8 @@
-const scriptURL = "https://script.google.com/macros/s/AKfycbzj2vtMinG_d5VPk2S2sA2_dSf11mDS9PgMeVpc_28p8EzuXYNg71RLvGWRk9Jdw_HQ/exec";
+const scriptURL = "https://script.google.com/macros/s/AKfycbzwHlDblWNgHBJFa6iqv1PVss0YgXbYUXwi7lsKEwzYBAumtmQ6Rq421JEIzh5zAR-Q/exec";
 
+/**
+ * Show/hide "Other" input fields based on selection
+ */
 function handleOther(selectField, otherInput) {
   selectField.addEventListener("change", () => {
     if (selectField.value === "Other") {
@@ -14,19 +17,24 @@ function handleOther(selectField, otherInput) {
   });
 }
 
-["education", "category", "paymentMode"].forEach(id =>
+// Apply to all "Other" fields
+["education", "category", "paymentMode"].forEach(id => {
   handleOther(
     document.getElementById(id),
     document.getElementById(id + "Other")
-  )
-);
+  );
+});
 
+/**
+ * Handle form submission
+ */
 async function handleSubmit(event) {
   event.preventDefault();
   const form = event.target;
   const statusEl = document.getElementById("formStatus");
   statusEl.textContent = "";
 
+  // Collect form data
   const formData = {};
   [...form.elements].forEach(el => {
     if (!el.name) return;
@@ -50,25 +58,30 @@ async function handleSubmit(event) {
   try {
     const response = await fetch(scriptURL, {
       method: "POST",
+      mode: "cors",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData)
     });
 
-    if (response.ok) {
+    const result = await response.json();
+
+    if (response.ok && result.result === "success") {
       statusEl.textContent = "Registration successful!";
       form.reset();
-      // Hide all “Other” inputs after reset
+      // Hide all "Other" inputs after reset
       ["educationOther", "categoryOther", "paymentModeOther"].forEach(id => {
         const el = document.getElementById(id);
         el.classList.add("hidden");
         el.required = false;
       });
     } else {
-      statusEl.textContent = "Error submitting form";
+      statusEl.textContent = result.message || "Error submitting form";
     }
-  } catch {
+  } catch (err) {
+    console.error("Error submitting form:", err);
     statusEl.textContent = "Network error. Try again.";
   }
 }
 
+// Attach submit handler
 document.getElementById("registrationForm").addEventListener("submit", handleSubmit);
