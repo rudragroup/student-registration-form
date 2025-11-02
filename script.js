@@ -66,7 +66,7 @@ async function handleSubmit(event) {
     if (response.ok && result.result === "success") {
       statusEl.textContent = "Registration successful!";
       form.reset();
-      ["educationOther", "categoryOther", "paymentModeOther"].forEach(id => {
+      ["educationOther", "categoryOther"].forEach(id => {
         const el = document.getElementById(id);
         el.classList.add("hidden");
         el.required = false;
@@ -81,3 +81,4 @@ async function handleSubmit(event) {
 }
 
 document.getElementById("registrationForm").addEventListener("submit", handleSubmit);
+
