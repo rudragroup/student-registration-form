@@ -80,20 +80,22 @@
             </select>
             <input id="categoryOther" class="hidden" placeholder="Please specify" type="text" />
           </div>
-          <div class="field">
+          <!-- paymentMode container START -->
+          <div class="field" id="paymentModeWrapper" style="display: none;">
+            <label for="paymentMode">Payment Mode</label>
+            <select id="paymentMode" name="paymentMode">
+              <option value="" disabled selected>Select</option>
+              <option value="Cash">Cash</option>
+              <option value="UPI">UPI</option>
+            </select>
+          </div>
+          <!-- paymentMode container END -->
+          <div class="field full">
             <label for="paymentStatus">Payment Status</label>
             <select id="paymentStatus" name="paymentStatus" required>
               <option value="" disabled selected>Select</option>
               <option value="Pending">Pending</option>
               <option value="Completed">Completed</option>
-            </select>
-          </div>
-          <div class="field" style="display: none;">
-            <label for="paymentMode">Payment Mode</label>
-            <select id="paymentMode" name="paymentMode" required>
-              <option value="NA" selected>NA</option>
-              <option value="Cash">Cash</option>
-              <option value="UPI">UPI</option>
             </select>
           </div>
         </div>
