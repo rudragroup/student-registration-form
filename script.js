@@ -28,10 +28,9 @@ const paymentStatus = document.getElementById('paymentStatus');
 const paymentModeWrapper = document.getElementById('paymentModeWrapper');
 const paymentMode = document.getElementById('paymentMode');
 
-// Function to toggle visibility and requirement of payment mode
 function togglePaymentMode() {
   if (paymentStatus.value === "Completed") {
-    paymentModeWrapper.style.display = '';
+    paymentModeWrapper.style.display = 'block';
     paymentMode.required = true;
   } else {
     paymentModeWrapper.style.display = 'none';
@@ -40,8 +39,10 @@ function togglePaymentMode() {
   }
 }
 
-// Initialize state on page load
-togglePaymentMode();
+// Initialize visibility on page load
+window.addEventListener('DOMContentLoaded', togglePaymentMode);
+
+// Toggle visibility on change
 paymentStatus.addEventListener('change', togglePaymentMode);
 
 // Handle form submission
@@ -73,7 +74,7 @@ async function handleSubmit(event) {
     const response = await fetch(scriptURL, {
       method: "POST",
       mode: "cors",
-      headers: { "Content-Type": "text/plain;charset=utf-8" }, 
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
       body: JSON.stringify(formData)
     });
 
@@ -87,7 +88,7 @@ async function handleSubmit(event) {
         el.classList.add("hidden");
         el.required = false;
       });
-      togglePaymentMode(); // Reset payment mode visibility on form reset
+      togglePaymentMode(); // Reset payment mode visibility after reset
     } else {
       statusEl.textContent = result.message || "Error submitting form.";
     }
