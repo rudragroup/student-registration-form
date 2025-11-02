@@ -23,6 +23,22 @@ function handleOther(selectField, otherInput) {
   );
 });
 
+// Handle Payment Mode visibility based on Payment Status
+document.getElementById('paymentStatus').addEventListener('change', function() {
+  const paymentStatus = this.value;
+  const paymentModeField = document.getElementById('paymentMode');
+  const paymentModeLabel = paymentModeField.closest('.field');
+  
+  if (paymentStatus === 'Completed') {
+    paymentModeField.closest('.field').style.display = 'block'; // Show Payment Mode
+    paymentModeField.required = true; // Make it required
+  } else {
+    paymentModeField.closest('.field').style.display = 'none'; // Hide Payment Mode
+    paymentModeField.required = false; // Remove requirement
+    paymentModeField.value = 'NA'; // Set default to 'NA'
+  }
+});
+
 // Handle form submission
 async function handleSubmit(event) {
   event.preventDefault();
@@ -52,15 +68,10 @@ async function handleSubmit(event) {
     const response = await fetch(scriptURL, {
       method: "POST",
       mode: "cors",
-      // *** CORS FIX APPLIED HERE ***
-      // Changed Content-Type to 'text/plain' to make it a 'simple request' 
-      // and bypass the failed OPTIONS preflight.
       headers: { "Content-Type": "text/plain;charset=utf-8" }, 
       body: JSON.stringify(formData)
     });
 
-    // Note: response.json() will still work because your Apps Script's doPost 
-    // function returns ContentService.MimeType.JSON.
     const result = await response.json();
 
     if (response.ok && result.result === "success") {
@@ -82,3 +93,9 @@ async function handleSubmit(event) {
 
 document.getElementById("registrationForm").addEventListener("submit", handleSubmit);
 
+// Initial check for Payment Mode visibility
+const paymentStatus = document.getElementById('paymentStatus');
+if (paymentStatus.value !== 'Completed') {
+  document.getElementById('paymentMode').closest('.field').style.display = 'none'; // Hide Payment Mode by default
+  document.getElementById('paymentMode').value = 'NA'; // Set default value to 'NA'
+}
